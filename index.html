@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pascal Ndife | Data Analyst Portfolio</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            },
+            dark: {
+              bg: '#0a0f1d',
+              card: '#111827',
+              border: '#1f2937',
+              muted: '#374151'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Plotly.js for interactive dashboards -->
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+
+  <style>
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0a0f1d;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1f2937;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3b82f6;
+    }
+  </style>
+</head>
+<body class="bg-dark-bg text-gray-200 antialiased font-sans selection:bg-brand-500 selection:text-white">
+
+  <!-- ================= TOP NAVIGATION ================= -->
+  <nav class="sticky top-0 z-50 backdrop-blur-md bg-dark-bg/85 border-b border-dark-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-500 flex items-center justify-center font-bold text-white shadow-lg shadow-brand-500/20 group-hover:scale-105 transition-transform overflow-hidden">
+          <img id="navAvatar" src="profile.jpg" alt="PN" onerror="this.style.display='none'; document.getElementById('navInitials').style.display='block';" class="w-full h-full object-cover" />
+          <span id="navInitials" style="display:none;">PN</span>
+        </div>
+        <div class="leading-tight">
+          <span class="block text-sm font-semibold tracking-wide text-white group-hover:text-brand-400 transition-colors">Pascal Ndife</span>
+          <span class="block text-xs text-gray-400">Data Analytics Enthusiast</span>
+        </div>
+      </a>
+
+      <!-- Desktop Links -->
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+        <a href="#projects" class="hover:text-brand-400 transition-colors">Projects</a>
+        <a href="#dashboards" class="hover:text-brand-400 transition-colors flex items-center gap-1.5">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          Live Dashboards
+        </a>
+        <a href="#skills" class="hover:text-brand-400 transition-colors">Skills</a>
+        <a href="#about" class="hover:text-brand-400 transition-colors">About</a>
+        <a href="#contact" class="px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-white font-semibold transition-all shadow-md shadow-brand-600/30">
+          Contact Me
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button id="mobileMenuBtn" class="md:hidden text-gray-400 hover:text-white p-2">
+        <i class="fa-solid fa-bars text-xl"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobileMenu" class="hidden md:hidden px-4 pt-2 pb-6 space-y-3 bg-dark-card border-b border-dark-border">
+      <a href="#projects" class="block py-2 text-gray-300 hover:text-white">Projects</a>
+      <a href="#dashboards" class="block py-2 text-gray-300 hover:text-white">Live Dashboards</a>
+      <a href="#skills" class="block py-2 text-gray-300 hover:text-white">Skills</a>
+      <a href="#about" class="block py-2 text-gray-300 hover:text-white">About</a>
+      <a href="#contact" class="block py-2 text-brand-400 font-semibold">Contact Me</a>
+    </div>
+  </nav>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section id="hero" class="relative pt-16 pb-24 overflow-hidden">
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[320px] bg-brand-600/15 rounded-full blur-[120px] pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+      
+      <!-- PROFILE PICTURE AVATAR -->
+      <div class="relative w-32 h-32 sm:w-40 sm:h-40 mx-auto mb-6 group">
+        <div class="w-full h-full rounded-full ring-4 ring-brand-500/40 p-1 bg-dark-card shadow-2xl overflow-hidden flex items-center justify-center">
+          <img id="mainProfilePic" src="profile.jpg" alt="Pascal Ndife" 
+               onerror="this.style.display='none'; document.getElementById('profileFallback').style.display='flex';" 
+               class="w-full h-full object-cover rounded-full" />
+          
+          <!-- Fallback when profile.jpg isn't placed yet -->
+          <div id="profileFallback" style="display:none;" class="w-full h-full rounded-full bg-gradient-to-tr from-brand-700 via-indigo-600 to-purple-600 flex flex-col items-center justify-center text-white text-center p-2">
+            <span class="text-3xl font-bold tracking-wider">PN</span>
+            <span class="text-[10px] text-brand-200 mt-1">Add profile.jpg</span>
+          </div>
+        </div>
+
+        <!-- Direct Upload Button for instant testing -->
+        <label for="picUploader" title="Click to test your profile photo instantly" class="absolute bottom-1 right-1 w-9 h-9 rounded-full bg-brand-600 hover:bg-brand-500 text-white flex items-center justify-center cursor-pointer shadow-lg transition-transform hover:scale-110 border-2 border-dark-bg">
+          <i class="fa-solid fa-camera text-xs"></i>
+          <input type="file" id="picUploader" accept="image/*" class="hidden" onchange="previewUserPhoto(event)" />
+        </label>
+      </div>
+
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-950/70 border border-brand-800/60 text-brand-300 text-xs font-medium mb-5">
+        <i class="fa-solid fa-chart-line text-brand-400"></i>
+        <span>Data Analytics Enthusiast & BI Developer</span>
+      </div>
+
+      <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-4 leading-tight max-w-4xl mx-auto">
+        Hi, I'm <span class="bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-400 bg-clip-text text-transparent">Pascal Ndife</span>
+      </h1>
+
+      <p class="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto mb-8 font-normal leading-relaxed">
+        Passionate about turning raw, messy business data into clean records, intuitive spreadsheets, interactive Streamlit apps, and informative visual dashboards.
+      </p>
+
+      <!-- Primary Action Buttons -->
+      <div class="flex flex-wrap items-center justify-center gap-4 mb-10">
+        <a href="#dashboards" class="px-6 py-3 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-semibold transition-all shadow-lg shadow-brand-600/30 flex items-center gap-2">
+          <i class="fa-solid fa-play"></i> Try Interactive Dashboards
+        </a>
+        <a href="#projects" class="px-6 py-3 rounded-xl bg-dark-card hover:bg-dark-border text-gray-200 border border-dark-border font-semibold transition-all flex items-center gap-2">
+          <i class="fa-solid fa-folder-open"></i> Explore My Projects
+        </a>
+      </div>
+
+      <!-- Social Connect Badges (Exact Handles) -->
+      <div class="pt-6 border-t border-dark-border/60 max-w-2xl mx-auto flex flex-wrap items-center justify-center gap-3">
+        <!-- LinkedIn -->
+        <a href="https://linkedin.com/in/pascal-ndife-755336426" target="_blank" rel="noopener noreferrer" 
+           class="px-3.5 py-2 rounded-lg bg-dark-card border border-dark-border text-gray-300 hover:text-white hover:border-[#0a66c2] hover:bg-[#0a66c2]/10 transition-all flex items-center gap-2 text-xs sm:text-sm font-medium">
+          <i class="fa-brands fa-linkedin text-[#0a66c2] text-base"></i> LinkedIn
+        </a>
+
+        <!-- GitHub -->
+        <a href="https://github.com/leodera" target="_blank" rel="noopener noreferrer" 
+           class="px-3.5 py-2 rounded-lg bg-dark-card border border-dark-border text-gray-300 hover:text-white hover:border-gray-500 hover:bg-white/5 transition-all flex items-center gap-2 text-xs sm:text-sm font-medium">
+          <i class="fa-brands fa-github text-white text-base"></i> GitHub (@leodera)
+        </a>
+
+        <!-- Twitter / X -->
+        <a href="https://x.com/leo_analyst" target="_blank" rel="noopener noreferrer" 
+           class="px-3.5 py-2 rounded-lg bg-dark-card border border-dark-border text-gray-300 hover:text-white hover:border-gray-400 hover:bg-white/5 transition-all flex items-center gap-2 text-xs sm:text-sm font-medium">
+          <i class="fa-brands fa-x-twitter text-white text-base"></i> @leo_analyst
+        </a>
+
+        <!-- Facebook -->
+        <a href="https://www.facebook.com/chileodera" target="_blank" rel="noopener noreferrer" 
+           class="px-3.5 py-2 rounded-lg bg-dark-card border border-dark-border text-gray-300 hover:text-white hover:border-[#1877f2] hover:bg-[#1877f2]/10 transition-all flex items-center gap-2 text-xs sm:text-sm font-medium">
+          <i class="fa-brands fa-facebook text-[#1877f2] text-base"></i> Facebook
+        </a>
+
+        <!-- Email Direct -->
+        <a href="mailto:ndifepascal@gmail.com" 
+           class="px-3.5 py-2 rounded-lg bg-dark-card border border-dark-border text-gray-300 hover:text-white hover:border-emerald-500 hover:bg-emerald-500/10 transition-all flex items-center gap-2 text-xs sm:text-sm font-medium">
+          <i class="fa-solid fa-envelope text-emerald-400 text-base"></i> Email Me
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= LIVE DASHBOARDS ================= -->
+  <section id="dashboards" class="py-20 bg-dark-card/40 border-y border-dark-border relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+        <div>
+          <span class="text-xs uppercase tracking-widest text-brand-400 font-semibold">Interactive Data Center</span>
+          <h2 class="text-3xl font-bold text-white mt-1">Live Dashboard Showcase</h2>
+          <p class="text-gray-400 text-sm mt-1 max-w-xl">
+            Test interactive visual reports directly on this page or load your live Streamlit web apps and Power BI reports.
+          </p>
+        </div>
+
+        <!-- Dashboard Type Switcher Tabs -->
+        <div class="flex items-center p-1 bg-dark-card border border-dark-border rounded-xl self-start md:self-auto">
+          <button onclick="switchDashboardTab('plotly')" id="tabBtnPlotly" class="px-4 py-2 rounded-lg text-xs font-semibold bg-brand-600 text-white transition-all">
+            <i class="fa-solid fa-chart-simple mr-1.5"></i> Plotly.js Visuals
+          </button>
+          <button onclick="switchDashboardTab('streamlit')" id="tabBtnStreamlit" class="px-4 py-2 rounded-lg text-xs font-semibold text-gray-400 hover:text-white transition-all">
+            <i class="fa-solid fa-bolt mr-1.5 text-red-400"></i> Streamlit Live Embed
+          </button>
+          <button onclick="switchDashboardTab('powerbi')" id="tabBtnPowerbi" class="px-4 py-2 rounded-lg text-xs font-semibold text-gray-400 hover:text-white transition-all">
+            <i class="fa-solid fa-table-columns mr-1.5 text-amber-400"></i> Power BI Embed
+          </button>
+        </div>
+      </div>
+
+      <!-- VIEW 1: PLOTLY.JS INTERACTIVE CHARTS -->
+      <div id="viewPlotly" class="space-y-6">
+        
+        <!-- Controls Filter Bar -->
+        <div class="bg-dark-card border border-dark-border rounded-2xl p-4 flex flex-wrap items-center justify-between gap-4">
+          <div class="flex flex-wrap items-center gap-4">
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Region</label>
+              <select id="plotlyRegionFilter" onchange="renderPlotlyCharts()" class="bg-dark-bg border border-dark-border text-white text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-brand-500">
+                <option value="all">All Regions</option>
+                <option value="North America">North America</option>
+                <option value="Europe">Europe</option>
+                <option value="Asia Pacific">Asia Pacific</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Product Category</label>
+              <select id="plotlyCategoryFilter" onchange="renderPlotlyCharts()" class="bg-dark-bg border border-dark-border text-white text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-brand-500">
+                <option value="all">All Categories</option>
+                <option value="Technology">Technology</option>
+                <option value="Furniture">Furniture</option>
+                <option value="Office Supplies">Office Supplies</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-medium text-gray-400 mb-1">Year</label>
+              <select id="plotlyYearFilter" onchange="renderPlotlyCharts()" class="bg-dark-bg border border-dark-border text-white text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-brand-500">
+                <option value="2026">2026</option>
+                <option value="2025">2025</option>
+              </select>
+            </div>
+          </div>
+
+          <button onclick="renderPlotlyCharts()" class="px-3.5 py-2 rounded-lg bg-dark-bg border border-dark-border hover:border-brand-500 text-xs text-brand-400 font-medium transition-colors">
+            <i class="fa-solid fa-arrows-rotate mr-1"></i> Recalculate KPIs
+          </button>
+        </div>
+
+        <!-- KPI Metrics -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="bg-dark-card border border-dark-border rounded-xl p-4">
+            <span class="text-xs text-gray-400 font-medium">Total Tracked Sales</span>
+            <div id="kpiRevenue" class="text-2xl font-bold text-white mt-1">$485,200</div>
+            <span class="text-xs text-emerald-400 flex items-center gap-1 mt-1">
+              <i class="fa-solid fa-arrow-trend-up"></i> Sales volume on track
+            </span>
+          </div>
+          <div class="bg-dark-card border border-dark-border rounded-xl p-4">
+            <span class="text-xs text-gray-400 font-medium">Average Order Value</span>
+            <div id="kpiAov" class="text-2xl font-bold text-white mt-1">$245.80</div>
+            <span class="text-xs text-brand-400 flex items-center gap-1 mt-1">
+              <i class="fa-solid fa-receipt"></i> Filtered average
+            </span>
+          </div>
+          <div class="bg-dark-card border border-dark-border rounded-xl p-4">
+            <span class="text-xs text-gray-400 font-medium">Total Orders Analyzed</span>
+            <div id="kpiOrders" class="text-2xl font-bold text-white mt-1">1,974</div>
+            <span class="text-xs text-indigo-400 flex items-center gap-1 mt-1">
+              <i class="fa-solid fa-check"></i> Clean records audited
+            </span>
+          </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 bg-dark-card border border-dark-border rounded-2xl p-5 shadow-lg">
+            <h3 class="text-sm font-semibold text-white mb-1">Monthly Sales Performance</h3>
+            <p class="text-xs text-gray-400 mb-3">Comparing actual revenue against monthly targets</p>
+            <div id="plotlyTimeSeries" class="w-full h-80"></div>
+          </div>
+
+          <div class="bg-dark-card border border-dark-border rounded-2xl p-5 shadow-lg">
+            <h3 class="text-sm font-semibold text-white mb-1">Share by Category</h3>
+            <p class="text-xs text-gray-400 mb-3">Breakdown of product volume</p>
+            <div id="plotlyDonut" class="w-full h-80"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- VIEW 2: STREAMLIT LIVE EMBED HUB -->
+      <div id="viewStreamlit" class="hidden space-y-4">
+        <div class="bg-dark-card border border-dark-border rounded-2xl p-5">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-dark-border">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-red-500 inline-block animate-pulse"></span>
+                <h3 class="text-base font-bold text-white">Streamlit Community Cloud Viewport</h3>
+              </div>
+              <p class="text-xs text-gray-400 mt-0.5">
+                Host your deployed Streamlit dashboard directly here. Just append <code class="text-brand-400 font-mono">?embed=true</code> to your public Streamlit URL.
+              </p>
+            </div>
+
+            <!-- URL Loader -->
+            <div class="flex items-center gap-2">
+              <input type="text" id="streamlitUrlInput" placeholder="https://your-app.streamlit.app/?embed=true" 
+                     class="bg-dark-bg border border-dark-border text-gray-200 text-xs rounded-lg px-3 py-2 w-72 focus:outline-none focus:border-brand-500" 
+                     value="https://share.streamlit.io" />
+              <button onclick="updateStreamlitIframe()" class="px-3.5 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold transition-all">
+                Load App
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="streamlitFrameContainer" class="w-full h-[650px] bg-dark-bg rounded-2xl border border-dark-border overflow-hidden relative shadow-2xl">
+          <iframe id="streamlitIframe" src="https://share.streamlit.io" class="w-full h-full border-0" allow="clipboard-write;" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <!-- VIEW 3: POWER BI EMBED -->
+      <div id="viewPowerbi" class="hidden space-y-4">
+        <div class="bg-dark-card border border-dark-border rounded-2xl p-5">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-dark-border">
+            <div>
+              <div class="flex items-center gap-2">
+                <i class="fa-solid fa-chart-pie text-amber-400"></i>
+                <h3 class="text-base font-bold text-white">Power BI Publish-to-Web Viewer</h3>
+              </div>
+              <p class="text-xs text-gray-400 mt-0.5">
+                Paste your Power BI public embed link to display your interactive reports directly.
+              </p>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <input type="text" id="powerbiUrlInput" placeholder="Paste Power BI embed link..." 
+                     class="bg-dark-bg border border-dark-border text-gray-200 text-xs rounded-lg px-3 py-2 w-72 focus:outline-none focus:border-brand-500" />
+              <button onclick="updatePowerbiIframe()" class="px-3.5 py-2 rounded-lg bg-amber-600 hover:bg-amber-500 text-white text-xs font-semibold transition-all">
+                Load Report
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="powerbiFrameContainer" class="w-full h-[650px] bg-dark-bg rounded-2xl border border-dark-border overflow-hidden relative shadow-2xl flex flex-col items-center justify-center text-center p-8">
+          <iframe id="powerbiIframe" class="w-full h-full border-0 hidden" allowfullscreen></iframe>
+          <div id="powerbiPlaceholder" class="max-w-md">
+            <div class="w-16 h-16 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400 flex items-center justify-center text-2xl mx-auto mb-4">
+              <i class="fa-solid fa-table-columns"></i>
+            </div>
+            <h4 class="text-lg font-bold text-white mb-2">Publish-to-Web Ready</h4>
+            <p class="text-xs text-gray-400 mb-5 leading-relaxed">
+              When you publish your Power BI report to the web, copy the public URL and paste it above to display it live.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= PROJECTS & CASE STUDIES ================= -->
+  <section id="projects" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs uppercase tracking-widest text-brand-400 font-semibold">Featured Work</span>
+        <h2 class="text-3xl font-bold text-white mt-1">Data Analysis Projects</h2>
+        <p class="text-gray-400 text-sm mt-2">
+          Projects focused on data cleaning, SQL queries, spreadsheet modeling, and interactive reporting.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Project 1 -->
+        <div class="bg-dark-card border border-dark-border rounded-2xl overflow-hidden hover:border-brand-500/60 transition-all flex flex-col group">
+          <div class="p-6 bg-gradient-to-br from-blue-950/40 via-dark-card to-dark-bg border-b border-dark-border flex flex-col justify-between h-44">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-medium px-2.5 py-1 rounded bg-brand-950 text-brand-300 border border-brand-800/40">SQL & Python</span>
+              <a href="https://github.com/leodera/Superstore_Commercial_Audit" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">
+                <i class="fa-brands fa-github text-xl"></i>
+              </a>
+            </div>
+            <div>
+              <span class="text-xs text-gray-400">Commercial Audit</span>
+              <h3 class="text-lg font-bold text-white group-hover:text-brand-400 transition-colors">Superstore Sales & Profit Audit</h3>
+            </div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <p class="text-xs text-gray-300 leading-relaxed">
+              Conducted an in-depth audit of retail transactional records. Cleaned sales anomalies with Python (Pandas) and wrote SQL queries (aggregations, CTEs) to evaluate regional profit margins and high-discount losses.
+            </p>
+            <div class="space-y-3 pt-3 border-t border-dark-border/60">
+              <div class="flex flex-wrap gap-1.5">
+                <span class="text-[11px] px-2 py-0.5 rounded bg-dark-bg text-gray-300 border border-dark-border">SQL CTEs</span>
+                <span class="text-[11px] px-2 py-0.5 rounded bg-dark-bg text-gray-300 border border-dark-border">Python Pandas</span>
+                <span class="text-[11px] px-2 py-0.5 rounded bg-dark-bg text-gray-300 border border-dark-border">Data Cleaning</span>
+              </div>
+              <a href="https://github.com/leodera/Superstore_Commercial_Audit" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-400 hover:text-brand-300">
+                View on GitHub <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="bg-dark-card border border-dark-border rounded-2xl overflow-hidden hover:border-brand-500/60 transition-all flex flex-col group">
+          <div class="p-6 bg-gradient-to-br from-purple-950/40 via-dark-card to-dark-bg border-b border-dark-border flex flex-col justify-between h-44">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-medium px-2.5 py-1 rounded bg-purple-950 text-purple-300 border border-purple-800/40">Power BI & SQL</span>
+              <a href="https://github.com/leodera/Telco_Customer_Churn_Analytics" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">
+                <i class="fa-brands fa-github text-xl"></i>
+              </a>
+            </div>
+            <div>
+              <span class="text-xs text-gray-400">Customer Analysis</span>
+              <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors">Telco Customer Churn Insights</h3>
+            </div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <p class="text-xs text-gray-300 leading-relaxed">
+              Analyzed subscriber demographics, contract duration, and billing methods to uncover why customers leave. Created clean SQL views and an interactive Power BI dashboard tracking churn rates across key segments.
+            </p>
+            <div class="space-y-3 pt-3 border-t border-dark-border/60">
+              <div class="flex flex-wrap gap-1.5">
+                <span class="text-[11px] px-2 py-0.5 rounded bg-dark-bg text-gray-300 border border-dark-border">Power BI</span>
+                <span class="text-[11px] px-2 py-0.5 rounded bg-dark-bg text-gray-300 border border-dark-border">DAX Formulas</span>
+                <span class="text-[11px] px-2 py-0.5 rounded bg-dark-bg text-gray-300 border border-dark-border">SQL Views</span>
+              </div>
+              <a href="https://github.com/leodera/Telco_Customer_Churn_Analytics" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-purple-400 hover:text-purple-300">
+                View on GitHub <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="bg-dark-card border border-dark-border rounded-2xl overflow-hidden hover:border-brand-500/60 transition-all flex flex-col group">
+          <div class="p-6 bg-gradient-to-br from-emerald-950/40 via-dark-card to-dark-bg border-b border-dark-border flex flex-col justify-between h-44">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-mono font-medium px-2.5 py-1 rounded bg-emerald-950 text-emerald-300 border border-emerald-800/40">Streamlit & Plotly</span>
+              <a href="https://github.com/leodera/data-analysis-portfolio" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">
+                <i class="fa-brands fa-github text-xl"></i>
+              </a>
+            </div>
+            <div>
+              <span class="text-xs text-gray-400">Interactive Apps</span>
+              <h3 class="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors">Sales Performance Dashboard App</h3>
+            </div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <p class="text-xs text-gray-300 leading-relaxed">
+              Developed a dynamic Python Streamlit dashboard allowing users to filter datasets on the fly, examine monthly trendlines, and export summary visual reports with Plotly.
+            </p>
+            <div class="space-y-3 pt-3 border-t border-dark-border/60">
+              <div class="flex flex-wrap gap-1.5">
+                <span class="text-[11px] px-2 py-0.5 rounded bg-dark-bg text-gray-300 border border-dark-border">Streamlit</span>
+                <span class="text-[11px] px-2 py-0.5 rounded bg-dark-bg text-gray-300 border border-dark-border">Plotly</span>
+                <span class="text-[11px] px-2 py-0.5 rounded bg-dark-bg text-gray-300 border border-dark-border">Pandas</span>
+              </div>
+              <a href="https://github.com/leodera/data-analysis-portfolio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 hover:text-emerald-300">
+                View on GitHub <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PRACTICAL SKILLS ================= -->
+  <section id="skills" class="py-20 bg-dark-card/30 border-y border-dark-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <span class="text-xs uppercase tracking-widest text-brand-400 font-semibold">Core Capabilities</span>
+        <h2 class="text-3xl font-bold text-white mt-1">Tools & Core Analytics Skills</h2>
+        <p class="text-gray-400 text-sm mt-2">
+          The essential tools I use daily to clean, query, and visualize business data.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- SQL & Databases -->
+        <div class="bg-dark-card border border-dark-border rounded-2xl p-6 hover:border-brand-500/40 transition-colors">
+          <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/20 text-brand-400 flex items-center justify-center text-lg mb-4">
+            <i class="fa-solid fa-database"></i>
+          </div>
+          <h3 class="text-base font-bold text-white mb-2">SQL Querying</h3>
+          <ul class="space-y-2 text-xs text-gray-300">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-400 text-[10px]"></i> PostgreSQL, MySQL & SQLite</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-400 text-[10px]"></i> Joins, Unions & Subqueries</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-400 text-[10px]"></i> Common Table Expressions (CTEs)</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-brand-400 text-[10px]"></i> Window Functions & Grouping</li>
+          </ul>
+        </div>
+
+        <!-- Python Analytics -->
+        <div class="bg-dark-card border border-dark-border rounded-2xl p-6 hover:border-brand-500/40 transition-colors">
+          <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center text-lg mb-4">
+            <i class="fa-brands fa-python"></i>
+          </div>
+          <h3 class="text-base font-bold text-white mb-2">Python for Analysis</h3>
+          <ul class="space-y-2 text-xs text-gray-300">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400 text-[10px]"></i> Pandas DataFrame Manipulation</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400 text-[10px]"></i> Data Cleaning & Wrangling</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400 text-[10px]"></i> Matplotlib & Seaborn Visuals</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-indigo-400 text-[10px]"></i> Jupyter Notebook Analysis</li>
+          </ul>
+        </div>
+
+        <!-- Dashboards & BI -->
+        <div class="bg-dark-card border border-dark-border rounded-2xl p-6 hover:border-brand-500/40 transition-colors">
+          <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400 flex items-center justify-center text-lg mb-4">
+            <i class="fa-solid fa-chart-pie"></i>
+          </div>
+          <h3 class="text-base font-bold text-white mb-2">BI & Dashboards</h3>
+          <ul class="space-y-2 text-xs text-gray-300">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400 text-[10px]"></i> Power BI Visual Reports & DAX</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400 text-[10px]"></i> Streamlit Python Apps</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400 text-[10px]"></i> Plotly Interactive Charts</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-purple-400 text-[10px]"></i> Data Storytelling</li>
+          </ul>
+        </div>
+
+        <!-- Spreadsheets & Workflow -->
+        <div class="bg-dark-card border border-dark-border rounded-2xl p-6 hover:border-brand-500/40 transition-colors">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg mb-4">
+            <i class="fa-solid fa-table"></i>
+          </div>
+          <h3 class="text-base font-bold text-white mb-2">Spreadsheets & Tools</h3>
+          <ul class="space-y-2 text-xs text-gray-300">
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-[10px]"></i> Excel / Google Sheets Pivot Tables</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-[10px]"></i> XLOOKUP, VLOOKUP, SUMIFS</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-[10px]"></i> Git & GitHub Version Control</li>
+            <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400 text-[10px]"></i> VS Code Workspace Setup</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ABOUT ME ================= -->
+  <section id="about" class="py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        
+        <div>
+          <span class="text-xs uppercase tracking-widest text-brand-400 font-semibold">About Me</span>
+          <h2 class="text-3xl font-bold text-white mt-1 mb-6">Turning Raw Data Into Clarity</h2>
+          <div class="space-y-4 text-sm text-gray-300 leading-relaxed">
+            <p>
+              I am an enthusiastic Data Analyst focused on discovering practical, data-driven answers to business questions. I enjoy the process of taking untidy spreadsheets and databases, auditing discrepancies, and shaping them into clear metrics.
+            </p>
+            <p>
+              My goal is simple: help teams make informed decisions with clean numbers, clear charts, and straightforward dashboards without unnecessary complexity.
+            </p>
+          </div>
+
+          <div class="mt-8 flex flex-wrap items-center gap-4 text-xs font-mono text-gray-400">
+            <div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-dark-card border border-dark-border">
+              <i class="fa-solid fa-check-double text-emerald-400"></i>
+              <span>Google Data Analytics Coursework</span>
+            </div>
+            <div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-dark-card border border-dark-border">
+              <i class="fa-solid fa-heart text-red-400"></i>
+              <span>Continuous Learner</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-dark-card border border-dark-border rounded-2xl p-6 sm:p-8 space-y-6">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-list-check text-brand-400"></i>
+            How I Work Through Data Projects
+          </h3>
+
+          <div class="space-y-5">
+            <div class="flex gap-4">
+              <div class="w-7 h-7 rounded-lg bg-brand-600/20 text-brand-400 border border-brand-500/30 flex items-center justify-center font-bold text-xs shrink-0">1</div>
+              <div>
+                <h4 class="text-sm font-semibold text-white">Understand the Question</h4>
+                <p class="text-xs text-gray-400 mt-0.5">Define what business problem we are trying to solve before touching any formulas.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="w-7 h-7 rounded-lg bg-purple-600/20 text-purple-400 border border-purple-500/30 flex items-center justify-center font-bold text-xs shrink-0">2</div>
+              <div>
+                <h4 class="text-sm font-semibold text-white">Clean & Validate Data</h4>
+                <p class="text-xs text-gray-400 mt-0.5">Remove duplicate rows, handle null values, and ensure columns have the right data types.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="w-7 h-7 rounded-lg bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center font-bold text-xs shrink-0">3</div>
+              <div>
+                <h4 class="text-sm font-semibold text-white">Analyze & Visualize</h4>
+                <p class="text-xs text-gray-400 mt-0.5">Use SQL queries, Excel pivot tables, and Power BI/Streamlit charts to reveal meaningful patterns.</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4">
+              <div class="w-7 h-7 rounded-lg bg-amber-600/20 text-amber-400 border border-amber-500/30 flex items-center justify-center font-bold text-xs shrink-0">4</div>
+              <div>
+                <h4 class="text-sm font-semibold text-white">Share Practical Insights</h4>
+                <p class="text-xs text-gray-400 mt-0.5">Summarize findings in clear, non-technical language that helps decision-makers take action.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" class="py-20 bg-dark-card/40 border-t border-dark-border">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      
+      <span class="text-xs uppercase tracking-widest text-brand-400 font-semibold">Let's Connect</span>
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1 mb-4">Get In Touch</h2>
+      <p class="text-sm text-gray-400 max-w-xl mx-auto mb-10">
+        I am open to data analyst opportunities, project collaborations, and networking. Feel free to reach out directly!
+      </p>
+
+      <!-- Direct Contact Card -->
+      <div class="bg-dark-card border border-dark-border rounded-2xl p-6 sm:p-10 shadow-2xl max-w-2xl mx-auto">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-xl bg-dark-bg border border-dark-border mb-8">
+          <div class="flex items-center gap-3 text-left">
+            <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg shrink-0">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div>
+              <span class="text-xs text-gray-400 block font-medium">Direct Email</span>
+              <a href="mailto:ndifepascal@gmail.com" class="text-sm sm:text-base font-bold text-white hover:text-brand-400 transition-colors">
+                ndifepascal@gmail.com
+              </a>
+            </div>
+          </div>
+          <button onclick="copyEmailToClipboard()" class="px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold transition-all shrink-0">
+            <i class="fa-regular fa-copy mr-1.5"></i> Copy Email
+          </button>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="space-y-4">
+          <span class="text-xs text-gray-400 font-medium block uppercase tracking-wider">Find Me On</span>
+          <div class="flex flex-wrap items-center justify-center gap-3">
+            <a href="https://linkedin.com/in/pascal-ndife-755336426" target="_blank" rel="noopener noreferrer" 
+               class="px-4 py-2.5 rounded-xl bg-dark-bg border border-dark-border hover:border-[#0a66c2] hover:bg-[#0a66c2]/10 text-gray-300 hover:text-white transition-all text-xs font-semibold flex items-center gap-2">
+              <i class="fa-brands fa-linkedin text-[#0a66c2] text-lg"></i> LinkedIn
+            </a>
+            <a href="https://github.com/leodera" target="_blank" rel="noopener noreferrer" 
+               class="px-4 py-2.5 rounded-xl bg-dark-bg border border-dark-border hover:border-gray-500 hover:bg-white/5 text-gray-300 hover:text-white transition-all text-xs font-semibold flex items-center gap-2">
+              <i class="fa-brands fa-github text-lg"></i> GitHub (@leodera)
+            </a>
+            <a href="https://x.com/leo_analyst" target="_blank" rel="noopener noreferrer" 
+               class="px-4 py-2.5 rounded-xl bg-dark-bg border border-dark-border hover:border-gray-400 hover:bg-white/5 text-gray-300 hover:text-white transition-all text-xs font-semibold flex items-center gap-2">
+              <i class="fa-brands fa-x-twitter text-lg"></i> @leo_analyst
+            </a>
+            <a href="https://www.facebook.com/chileodera" target="_blank" rel="noopener noreferrer" 
+               class="px-4 py-2.5 rounded-xl bg-dark-bg border border-dark-border hover:border-[#1877f2] hover:bg-[#1877f2]/10 text-gray-300 hover:text-white transition-all text-xs font-semibold flex items-center gap-2">
+              <i class="fa-brands fa-facebook text-[#1877f2] text-lg"></i> Facebook
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="py-8 bg-dark-bg border-t border-dark-border text-center text-xs text-gray-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        © 2026 <span class="text-gray-300 font-semibold">Pascal Ndife</span>. All rights reserved.
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="#hero" class="hover:text-brand-400 transition-colors">Back to Top</a>
+        <a href="https://github.com/leodera" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">GitHub</a>
+        <a href="https://x.com/leo_analyst" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">X</a>
+        <a href="https://linkedin.com/in/pascal-ndife-755336426" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
+        <a href="mailto:ndifepascal@gmail.com" class="hover:text-white transition-colors">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast for Copy Notification -->
+  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-brand-600 text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2">
+    <i class="fa-solid fa-circle-check"></i>
+    <span>Email copied to clipboard!</span>
+  </div>
+
+  <!-- ================= JAVASCRIPT LOGIC ================= -->
+  <script>
+    // Preview selected photo instantly
+    function previewUserPhoto(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const mainImg = document.getElementById('mainProfilePic');
+          const navImg = document.getElementById('navAvatar');
+          const fallback = document.getElementById('profileFallback');
+          
+          mainImg.src = e.target.result;
+          mainImg.style.display = 'block';
+          fallback.style.display = 'none';
+          
+          if (navImg) {
+            navImg.src = e.target.result;
+            navImg.style.display = 'block';
+            document.getElementById('navInitials').style.display = 'none';
+          }
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // Mobile nav toggle
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Copy email
+    function copyEmailToClipboard() {
+      navigator.clipboard.writeText('ndifepascal@gmail.com').then(() => {
+        const toast = document.getElementById('toastNotification');
+        toast.classList.remove('translate-y-20', 'opacity-0');
+        setTimeout(() => {
+          toast.classList.add('translate-y-20', 'opacity-0');
+        }, 2500);
+      });
+    }
+
+    // Switch between Dashboard Views
+    function switchDashboardTab(tab) {
+      const viewPlotly = document.getElementById('viewPlotly');
+      const viewStreamlit = document.getElementById('viewStreamlit');
+      const viewPowerbi = document.getElementById('viewPowerbi');
+
+      const btnPlotly = document.getElementById('tabBtnPlotly');
+      const btnStreamlit = document.getElementById('tabBtnStreamlit');
+      const btnPowerbi = document.getElementById('tabBtnPowerbi');
+
+      [btnPlotly, btnStreamlit, btnPowerbi].forEach(b => {
+        b.className = "px-4 py-2 rounded-lg text-xs font-semibold text-gray-400 hover:text-white transition-all";
+      });
+      [viewPlotly, viewStreamlit, viewPowerbi].forEach(v => v.classList.add('hidden'));
+
+      if (tab === 'plotly') {
+        viewPlotly.classList.remove('hidden');
+        btnPlotly.className = "px-4 py-2 rounded-lg text-xs font-semibold bg-brand-600 text-white transition-all";
+        renderPlotlyCharts();
+      } else if (tab === 'streamlit') {
+        viewStreamlit.classList.remove('hidden');
+        btnStreamlit.className = "px-4 py-2 rounded-lg text-xs font-semibold bg-red-600 text-white transition-all";
+      } else if (tab === 'powerbi') {
+        viewPowerbi.classList.remove('hidden');
+        btnPowerbi.className = "px-4 py-2 rounded-lg text-xs font-semibold bg-amber-600 text-white transition-all";
+      }
+    }
+
+    function updateStreamlitIframe() {
+      const url = document.getElementById('streamlitUrlInput').value.trim();
+      if (url) {
+        document.getElementById('streamlitIframe').src = url;
+      }
+    }
+
+    function updatePowerbiIframe() {
+      const url = document.getElementById('powerbiUrlInput').value.trim();
+      if (url) {
+        const frame = document.getElementById('powerbiIframe');
+        const placeholder = document.getElementById('powerbiPlaceholder');
+        frame.src = url;
+        frame.classList.remove('hidden');
+        placeholder.classList.add('hidden');
+      }
+    }
+
+    // Interactive Plotly Charts
+    function renderPlotlyCharts() {
+      const region = document.getElementById('plotlyRegionFilter').value;
+      const cat = document.getElementById('plotlyCategoryFilter').value;
+      const year = document.getElementById('plotlyYearFilter').value;
+
+      let multiplier = 1.0;
+      if (region === 'North America') multiplier *= 1.2;
+      if (region === 'Europe') multiplier *= 1.05;
+      if (region === 'Asia Pacific') multiplier *= 0.9;
+      if (cat === 'Technology') multiplier *= 1.25;
+      if (cat === 'Furniture') multiplier *= 0.95;
+      if (cat === 'Office Supplies') multiplier *= 0.8;
+      if (year === '2025') multiplier *= 0.85;
+
+      const calcRev = Math.round(485200 * multiplier);
+      const calcOrders = Math.round(1974 * multiplier);
+      const calcAov = (calcRev / calcOrders).toFixed(2);
+
+      document.getElementById('kpiRevenue').innerText = '$' + calcRev.toLocaleString();
+      document.getElementById('kpiOrders').innerText = calcOrders.toLocaleString();
+      document.getElementById('kpiAov').innerText = '$' + calcAov;
+
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const baseMonthly = [28, 32, 36, 34, 40, 45, 42, 48, 52, 56, 60, 68];
+      const actualSales = baseMonthly.map(v => Math.round(v * multiplier * 1000));
+      const targetSales = baseMonthly.map(v => Math.round((v * multiplier + 4) * 1000));
+
+      const layoutCommon = {
+        paper_bgcolor: 'rgba(0,0,0,0)',
+        plot_bgcolor: 'rgba(0,0,0,0)',
+        font: { family: 'Inter, sans-serif', color: '#9ca3af', size: 11 },
+        margin: { l: 45, r: 20, t: 20, b: 35 },
+        legend: { orientation: 'h', y: -0.2, font: { color: '#e5e7eb' } },
+        xaxis: { gridcolor: '#1f2937' },
+        yaxis: { gridcolor: '#1f2937' }
+      };
+
+      // Bar + Line Trend
+      const trace1 = {
+        x: months,
+        y: actualSales,
+        name: 'Actual ($)',
+        type: 'bar',
+        marker: { color: '#3b82f6', opacity: 0.85 }
+      };
+      const trace2 = {
+        x: months,
+        y: targetSales,
+        name: 'Target ($)',
+        type: 'scatter',
+        mode: 'lines+markers',
+        line: { color: '#10b981', width: 2, dash: 'dash' }
+      };
+      Plotly.newPlot('plotlyTimeSeries', [trace1, trace2], layoutCommon, { responsive: true, displayModeBar: false });
+
+      // Donut Share
+      const donutData = [{
+        values: [45 * multiplier, 30, 25],
+        labels: ['Technology', 'Furniture', 'Office Supplies'],
+        type: 'pie',
+        hole: 0.65,
+        marker: { colors: ['#3b82f6', '#8b5cf6', '#10b981'] },
+        textinfo: 'percent',
+        hoverinfo: 'label+value+percent'
+      }];
+      const donutLayout = {
+        ...layoutCommon,
+        showlegend: true,
+        margin: { l: 15, r: 15, t: 15, b: 15 }
+      };
+      Plotly.newPlot('plotlyDonut', donutData, donutLayout, { responsive: true, displayModeBar: false });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderPlotlyCharts();
+    });
+
+    window.addEventListener('resize', () => {
+      const viewPlotly = document.getElementById('viewPlotly');
+      if (!viewPlotly.classList.contains('hidden')) {
+        Plotly.Plots.resize('plotlyTimeSeries');
+        Plotly.Plots.resize('plotlyDonut');
+      }
+    });
+  </script>
+</body>
+</html>
